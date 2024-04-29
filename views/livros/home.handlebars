@@ -1,0 +1,45 @@
+<div class="home-header">
+    {{#if session.userid}}
+        <h3 class="userNameHome">@{{session.username}}</h3>
+    {{/if}}
+    {{#if search}}
+        <h1>You are searching for: <span>{{search}}</span></h1>
+        {{#if livrosQty}}
+            <p>Were found <span>{{livrosQty}}</span> comments</p>
+        {{else}}
+            <p>No results were found for the term <span>{{search}}</span></p>
+        {{/if}}
+    {{else}}
+        <h1>Discover some of our <span>titles</span>:</h1>
+    {{/if}}
+    <form action="/" method="get">
+        <input type="text" name="search" placeholder="Write a book title here.">
+        <input type="submit" class="btn" value="Search">
+    </form>
+    <div class="order-container">
+        <span>Order by:</span>
+        <form action="/" method="get">
+            <input type="hidden" name="search" value="{{this.search}}">
+            <input type="hidden" name="order" value="new">
+            <button type="submit"><i class="bi bi-arrow-up"></i></button>
+        </form>
+        <form action="/" method="get">
+            <input type="hidden" name="search" value="{{this.search}}">
+            <input type="hidden" name="order" value="old">
+            <button type="submit"><i class="bi bi-arrow-down"></i></button>
+        </form>
+        <a href="/">Clean</a>
+    </div>
+</div>
+<div class="livros-container">
+    {{#each livros}}
+        <figure>
+            <blockquote>
+                "{{this.title}}"
+            </blockquote>
+            <p class="commentsP">{{this.comments}}</p>
+            <figcaption>Written by <span>{{this.writer}}</span></figcaption>
+            <figcaption>Commented by <span>{{this.User.name}}</span></figcaption>
+        </figure>
+    {{/each}}
+</div>

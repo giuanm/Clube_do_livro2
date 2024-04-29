@@ -1,0 +1,24 @@
+<div class="dashboard">
+    <div class="title-container">
+        <h2>Dashboard</h2>
+        <a href="/livros/add" class="btn">Create comments</a>
+    </div>
+    <h3>Your comments</h3>
+    <ul>
+        {{#each livros}}
+            <li>
+                <span class="label">{{this.title}}</span>
+                <span class="actions">
+                    <a href="/livros/edit/{{this.id}}" class="btn">Edit</a>
+                    <form action="/livros/remove" method="POST">
+                        <input type="hidden" name="id" value="{{this.id}}">
+                        <input type="submit" value="Delete" class="btn">
+                    </form>
+                </span>
+            </li>
+        {{/each}}
+    </ul>
+    {{#if emptyLivros}}
+        <p>There are no comments from you yet, start creating <a href="/livros/add">here.</a></p>
+    {{/if}}
+</div>
